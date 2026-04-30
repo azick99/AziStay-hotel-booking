@@ -2,91 +2,407 @@
 @import "tailwindcss";
 
 /* ② Google Fonts */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap");
 
-/* ③ All theme config moves here — replaces tailwind.config.js */
+/* ③ Theme — replaces tailwind.config.js */
 @theme {
-  /* Colors */
-  --color-brand-50: #f0f9ff;
-  --color-brand-100: #e0f2fe;
-  --color-brand-200: #bae6fd;
-  --color-brand-300: #7dd3fc;
-  --color-brand-400: #38bdf8;
-  --color-brand-500: #0ea5e9;
-  --color-brand-600: #0284c7;
-  --color-brand-700: #0369a1;
-  --color-brand-800: #075985;
-  --color-brand-900: #0c4a6e;
+  /* ── Brand (Sky Blue → Indigo shift for depth) ── */
+  --color-brand-50: #eef4ff;
+  --color-brand-100: #dde8ff;
+  --color-brand-200: #c0d2ff;
+  --color-brand-300: #96b4fe;
+  --color-brand-400: #6089fb;
+  --color-brand-500: #3b5ff7; /* primary action */
+  --color-brand-600: #2440e3;
+  --color-brand-700: #1c31c8;
+  --color-brand-800: #1e2da0;
+  --color-brand-900: #1e2b7f;
 
+  /* ── Accent — Amber Gold (replaces flat gold) ── */
+  --color-gold-50: #fffbeb;
+  --color-gold-100: #fef3c7;
+  --color-gold-200: #fde68a;
+  --color-gold-300: #fcd34d;
   --color-gold-400: #fbbf24;
   --color-gold-500: #f59e0b;
+  --color-gold-600: #d97706;
+  --color-gold-700: #b45309;
 
-  /* Fonts */
+  /* ── Neutral — Slate (cooler, more refined than plain gray) ── */
+  --color-neutral-50: #f8fafc;
+  --color-neutral-100: #f1f5f9;
+  --color-neutral-200: #e2e8f0;
+  --color-neutral-300: #cbd5e1;
+  --color-neutral-400: #94a3b8;
+  --color-neutral-500: #64748b;
+  --color-neutral-600: #475569;
+  --color-neutral-700: #334155;
+  --color-neutral-800: #1e293b;
+  --color-neutral-900: #0f172a;
+  --color-neutral-950: #020617;
+
+  /* ── Semantic ── */
+  --color-success-50: #f0fdf4;
+  --color-success-100: #dcfce7;
+  --color-success-500: #22c55e;
+  --color-success-600: #16a34a;
+  --color-success-700: #15803d;
+
+  --color-warning-50: #fffbeb;
+  --color-warning-100: #fef3c7;
+  --color-warning-500: #f59e0b;
+  --color-warning-600: #d97706;
+  --color-warning-700: #b45309;
+
+  --color-danger-50: #fff1f2;
+  --color-danger-100: #ffe4e6;
+  --color-danger-500: #f43f5e;
+  --color-danger-600: #e11d48;
+  --color-danger-700: #be123c;
+
+  --color-info-50: #eff6ff;
+  --color-info-100: #dbeafe;
+  --color-info-500: #3b82f6;
+  --color-info-600: #2563eb;
+  --color-info-700: #1d4ed8;
+
+  /* ── Fonts ── */
   --font-sans: "Inter", system-ui, sans-serif;
   --font-display: "Playfair Display", Georgia, serif;
 
-  /* Shadows */
-  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
-  --shadow-card-hover: 0 8px 40px rgba(0, 0, 0, 0.14);
-
-  /* Radii — xl/2xl are built-in in v4, only add if you want different values */
-  /* --radius-xl: 1rem; */
+  /* ── Elevation shadows (light mode) ── */
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.08);
+  --shadow-card: 0 4px 24px rgba(15, 23, 42, 0.08);
+  --shadow-card-hover: 0 12px 40px rgba(15, 23, 42, 0.14);
+  --shadow-modal: 0 24px 64px rgba(15, 23, 42, 0.22);
+  --shadow-brand: 0 4px 20px rgba(59, 95, 247, 0.3);
+  --shadow-brand-lg: 0 8px 32px rgba(59, 95, 247, 0.38);
 }
 
-/* ④ Dark mode — replaces darkMode: 'class' in config */
+/* ④ Dark mode */
 @variant dark (&:where(.dark, .dark *));
 
-/* ⑤ Base layer stays the same, just updated dark mode syntax */
+/* ─────────────────────────────────────────────
+   BASE
+───────────────────────────────────────────── */
 @layer base {
-  * {
-    @apply border-border;
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
   }
+
   body {
-    @apply bg-white text-gray-900 font-sans antialiased;
+    @apply bg-neutral-50 text-neutral-900 font-sans antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   }
   .dark body {
-    @apply bg-gray-950 text-gray-100;
+    @apply bg-neutral-950 text-neutral-100;
   }
+
   h1,
   h2,
   h3 {
     @apply font-display;
   }
+  h1 {
+    @apply text-4xl font-bold tracking-tight leading-tight;
+  }
+  h2 {
+    @apply text-2xl font-semibold tracking-tight;
+  }
+  h3 {
+    @apply text-xl font-semibold;
+  }
+
+  p {
+    @apply leading-relaxed;
+  }
+
+  ::selection {
+    @apply bg-brand-100 text-brand-900;
+  }
 }
 
-/* ⑥ Components — identical to v3 */
+/* ─────────────────────────────────────────────
+   BUTTONS
+───────────────────────────────────────────── */
+
 @layer components {
+  /* shared base */
+  .btn {
+    @apply inline-flex items-center justify-center gap-2
+           font-semibold text-sm leading-none
+           px-5 py-2.5 rounded-xl
+           transition-all duration-200 ease-out
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none
+           select-none cursor-pointer whitespace-nowrap;
+  }
+
+  /* Primary — rich brand blue */
   .btn-primary {
-    @apply bg-brand-500 hover:bg-brand-600 text-white font-semibold
-           px-6 py-3 rounded-xl transition-all duration-200
-           shadow-md hover:shadow-lg active:scale-95;
+    @apply btn
+           bg-brand-500 text-white
+           hover:bg-brand-600 hover:shadow-brand-lg
+           active:scale-[.97] active:shadow-brand
+           focus-visible:ring-brand-500
+           shadow-brand;
   }
+
+  /* Secondary — solid neutral, clearly distinct from primary */
   .btn-secondary {
-    @apply bg-white hover:bg-gray-50 text-gray-800 font-semibold
-           px-6 py-3 rounded-xl border border-gray-200
-           transition-all duration-200 shadow-sm hover:shadow-md;
+    @apply btn
+           bg-neutral-800 text-neutral-50
+           hover:bg-neutral-700 hover:shadow-md
+           active:scale-[.97]
+           focus-visible:ring-neutral-500
+           dark:bg-neutral-100 dark:text-neutral-900
+           dark:hover:bg-white;
   }
+
+  /* Ghost — low-key, outline only */
+  .btn-ghost {
+    @apply btn
+           bg-transparent text-neutral-700 border border-neutral-200
+           hover:bg-neutral-100 hover:border-neutral-300
+           active:scale-[.97]
+           focus-visible:ring-neutral-400
+           dark:text-neutral-300 dark:border-neutral-700
+           dark:hover:bg-neutral-800 dark:hover:border-neutral-600;
+  }
+
+  /* Danger */
+  .btn-danger {
+    @apply btn
+           bg-danger-600 text-white
+           hover:bg-danger-700 hover:shadow-lg
+           active:scale-[.97]
+           focus-visible:ring-danger-500
+           shadow-sm;
+  }
+
+  /* Gold / accent */
+  .btn-gold {
+    @apply btn
+           bg-gold-500 text-neutral-900
+           hover:bg-gold-400 hover:shadow-lg
+           active:scale-[.97]
+           focus-visible:ring-gold-400
+           shadow-sm font-bold;
+  }
+
+  /* Size modifiers */
+  .btn-xs {
+    @apply px-3 py-1.5 text-xs rounded-lg;
+  }
+  .btn-sm {
+    @apply px-4 py-2 text-sm rounded-xl;
+  }
+  .btn-lg {
+    @apply px-7 py-3.5 text-base rounded-2xl;
+  }
+  .btn-xl {
+    @apply px-8 py-4 text-lg rounded-2xl;
+  }
+
+  /* Icon-only square */
+  .btn-icon {
+    @apply p-2.5 aspect-square;
+  }
+
+  /* ─────────────────────────────────────────────
+   BADGES
+───────────────────────────────────────────── */
+
+  /* Base badge */
+  .badge {
+    @apply inline-flex items-center gap-1
+           text-xs font-semibold leading-none
+           px-2.5 py-1 rounded-full
+           transition-colors duration-150
+           whitespace-nowrap select-none;
+  }
+
+  /* Semantic variants */
+  .badge-default {
+    @apply badge bg-neutral-100 text-neutral-700
+           dark:bg-neutral-800 dark:text-neutral-300;
+  }
+  .badge-brand {
+    @apply badge bg-brand-50 text-brand-700
+           dark:bg-brand-900/40 dark:text-brand-300;
+  }
+  .badge-success {
+    @apply badge bg-success-50 text-success-700
+           dark:bg-success-600/20 dark:text-success-400;
+  }
+  .badge-warning {
+    @apply badge bg-warning-50 text-warning-700
+           dark:bg-warning-600/20 dark:text-warning-400;
+  }
+  .badge-danger {
+    @apply badge bg-danger-50 text-danger-700
+           dark:bg-danger-600/20 dark:text-danger-400;
+  }
+  .badge-info {
+    @apply badge bg-info-50 text-info-700
+           dark:bg-info-600/20 dark:text-info-400;
+  }
+  .badge-gold {
+    @apply badge bg-gold-100 text-gold-700
+           dark:bg-gold-600/20 dark:text-gold-400;
+  }
+
+  /* Solid variants (stronger presence) */
+  .badge-solid-brand {
+    @apply badge bg-brand-500 text-white;
+  }
+  .badge-solid-success {
+    @apply badge bg-success-500 text-white;
+  }
+  .badge-solid-danger {
+    @apply badge bg-danger-500 text-white;
+  }
+  .badge-solid-warning {
+    @apply badge bg-warning-500 text-neutral-900;
+  }
+  .badge-solid-neutral {
+    @apply badge bg-neutral-800 text-white dark:bg-neutral-200 dark:text-neutral-900;
+  }
+
+  /* Outline variants */
+  .badge-outline {
+    @apply badge bg-transparent border border-current;
+  }
+  .badge-outline-brand {
+    @apply badge-outline text-brand-600   border-brand-300   dark:text-brand-400   dark:border-brand-600;
+  }
+  .badge-outline-success {
+    @apply badge-outline text-success-600 border-success-300 dark:text-success-400 dark:border-success-600;
+  }
+  .badge-outline-danger {
+    @apply badge-outline text-danger-600  border-danger-300  dark:text-danger-400  dark:border-danger-600;
+  }
+  .badge-outline-neutral {
+    @apply badge-outline text-neutral-500 border-neutral-300 dark:text-neutral-400 dark:border-neutral-600;
+  }
+
+  /* Size modifiers */
+  .badge-sm {
+    @apply text-[11px] px-2 py-0.5;
+  }
+  .badge-lg {
+    @apply text-sm px-3.5 py-1.5 rounded-full;
+  }
+
+  /* Dot indicator inside badge */
+  .badge-dot::before {
+    content: "";
+    @apply w-1.5 h-1.5 rounded-full bg-current inline-block flex-shrink-0;
+  }
+
+  /* ─────────────────────────────────────────────
+   CARDS
+───────────────────────────────────────────── */
   .card {
-    @apply bg-white rounded-2xl shadow-card hover:shadow-card-hover
-           transition-all duration-300;
+    @apply bg-white rounded-2xl border border-neutral-200/80
+           transition-all duration-300 ease-out;
+    box-shadow: var(--shadow-card);
+  }
+  .card:hover {
+    box-shadow: var(--shadow-card-hover);
   }
   .dark .card {
-    @apply bg-gray-900 border border-gray-800;
+    @apply bg-neutral-900 border-neutral-800;
   }
+
+  .card-flat {
+    @apply bg-neutral-50 rounded-2xl border border-neutral-200;
+  }
+  .dark .card-flat {
+    @apply bg-neutral-900/60 border-neutral-800;
+  }
+
+  /* ─────────────────────────────────────────────
+   INPUTS
+───────────────────────────────────────────── */
   .input-base {
-    @apply w-full rounded-xl border border-gray-200 bg-white px-4 py-3
-           text-gray-900 placeholder-gray-400 focus:outline-none
-           focus:ring-2 focus:ring-brand-500 focus:border-transparent
-           transition-all duration-200;
+    @apply w-full rounded-xl border border-neutral-200 bg-white
+           px-4 py-3 text-sm text-neutral-900
+           placeholder:text-neutral-400
+           focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-transparent
+           transition-all duration-200
+           dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-100
+           dark:placeholder:text-neutral-500
+           dark:focus:ring-brand-400;
+  }
+
+  .input-error {
+    @apply input-base border-danger-400 focus:ring-danger-400;
+  }
+
+  .input-label {
+    @apply block text-sm font-medium text-neutral-700 mb-1.5
+           dark:text-neutral-300;
+  }
+  .input-hint {
+    @apply text-xs text-neutral-400 mt-1.5;
+  }
+  .input-error-msg {
+    @apply text-xs text-danger-600 mt-1.5;
+  }
+
+  /* ─────────────────────────────────────────────
+   MISC UTILITIES
+───────────────────────────────────────────── */
+
+  /* Divider */
+  .divider {
+    @apply border-t border-neutral-200 dark:border-neutral-800 my-6;
+  }
+
+  /* Pill chip (interactive tag) */
+  .chip {
+    @apply inline-flex items-center gap-1.5
+           text-xs font-medium px-3 py-1.5 rounded-full
+           border border-neutral-200 bg-white text-neutral-600
+           hover:bg-neutral-50 hover:border-neutral-300
+           cursor-pointer transition-all duration-150 select-none
+           dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400
+           dark:hover:bg-neutral-800;
+  }
+  .chip-active {
+    @apply border-brand-400 bg-brand-50 text-brand-700
+           dark:bg-brand-900/40 dark:border-brand-600 dark:text-brand-300;
+  }
+
+  /* Avatar */
+  .avatar {
+    @apply inline-flex items-center justify-center rounded-full
+           bg-brand-100 text-brand-700 font-semibold text-sm
+           flex-shrink-0 select-none
+           dark:bg-brand-900/50 dark:text-brand-300;
+  }
+
+  /* Skeleton loader */
+  .skeleton {
+    @apply bg-neutral-200 rounded animate-pulse
+           dark:bg-neutral-800;
   }
 }
 
-/* Smooth scrolling & scrollbar — unchanged */
+/* ─────────────────────────────────────────────
+   GLOBAL
+───────────────────────────────────────────── */
 html {
   scroll-behavior: smooth;
 }
+
 ::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 ::-webkit-scrollbar-track {
   background: #f1f5f9;
@@ -94,4 +410,11 @@ html {
 ::-webkit-scrollbar-thumb {
   background: #94a3b8;
   border-radius: 3px;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #0f172a;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
 }

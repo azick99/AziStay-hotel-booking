@@ -3,13 +3,13 @@ import { Suspense, lazy } from "react";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import PageLoader from "./components/layout/PageLoader";
-
+import './App.css';
 // Lazy load pages for better performance
 const HomePage = lazy(() => import("./pages/HomePage"));
 const SearchResultsPage = lazy(() => import("./pages/SearchResultsPage"));
 const HotelDetailPage = lazy(() => import("./pages/HotelDetailPage"));
 const BookingPage = lazy(() => import("./pages/BookingPage"));
-const ConfirmationPage = lazy(() => import("./pages/ConfirmationPage"));
+const ConfirmationPage = lazy(() => import("./pages/ConfermationPage"));
 const AITripPlannerPage = lazy(() => import("./pages/AITripPlannerPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
