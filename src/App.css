@@ -1,0 +1,97 @@
+/* ① Single import replaces all three @tailwind directives */
+@import "tailwindcss";
+
+/* ② Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap");
+
+/* ③ All theme config moves here — replaces tailwind.config.js */
+@theme {
+  /* Colors */
+  --color-brand-50: #f0f9ff;
+  --color-brand-100: #e0f2fe;
+  --color-brand-200: #bae6fd;
+  --color-brand-300: #7dd3fc;
+  --color-brand-400: #38bdf8;
+  --color-brand-500: #0ea5e9;
+  --color-brand-600: #0284c7;
+  --color-brand-700: #0369a1;
+  --color-brand-800: #075985;
+  --color-brand-900: #0c4a6e;
+
+  --color-gold-400: #fbbf24;
+  --color-gold-500: #f59e0b;
+
+  /* Fonts */
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-display: "Playfair Display", Georgia, serif;
+
+  /* Shadows */
+  --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.08);
+  --shadow-card-hover: 0 8px 40px rgba(0, 0, 0, 0.14);
+
+  /* Radii — xl/2xl are built-in in v4, only add if you want different values */
+  /* --radius-xl: 1rem; */
+}
+
+/* ④ Dark mode — replaces darkMode: 'class' in config */
+@variant dark (&:where(.dark, .dark *));
+
+/* ⑤ Base layer stays the same, just updated dark mode syntax */
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-white text-gray-900 font-sans antialiased;
+  }
+  .dark body {
+    @apply bg-gray-950 text-gray-100;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+  }
+}
+
+/* ⑥ Components — identical to v3 */
+@layer components {
+  .btn-primary {
+    @apply bg-brand-500 hover:bg-brand-600 text-white font-semibold
+           px-6 py-3 rounded-xl transition-all duration-200
+           shadow-md hover:shadow-lg active:scale-95;
+  }
+  .btn-secondary {
+    @apply bg-white hover:bg-gray-50 text-gray-800 font-semibold
+           px-6 py-3 rounded-xl border border-gray-200
+           transition-all duration-200 shadow-sm hover:shadow-md;
+  }
+  .card {
+    @apply bg-white rounded-2xl shadow-card hover:shadow-card-hover
+           transition-all duration-300;
+  }
+  .dark .card {
+    @apply bg-gray-900 border border-gray-800;
+  }
+  .input-base {
+    @apply w-full rounded-xl border border-gray-200 bg-white px-4 py-3
+           text-gray-900 placeholder-gray-400 focus:outline-none
+           focus:ring-2 focus:ring-brand-500 focus:border-transparent
+           transition-all duration-200;
+  }
+}
+
+/* Smooth scrolling & scrollbar — unchanged */
+html {
+  scroll-behavior: smooth;
+}
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 3px;
+}
