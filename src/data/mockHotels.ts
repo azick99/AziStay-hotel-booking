@@ -1,3 +1,4 @@
+import type { Hotel } from "@/types/hotel.types";
 
 export const mockHotels = [
   {
