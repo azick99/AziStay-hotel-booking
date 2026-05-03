@@ -12,13 +12,13 @@ built as a portfolio project to demonstrate frontend engineering skills.
 
 ## 📸 Screenshots
 
-| Home Page                            | Search Results                           | Hotel Detail                             |
-| ------------------------------------ | ---------------------------------------- | ---------------------------------------- |
-| ![Home](./docs/screenshots/home.png) | ![Search](./docs/screenshots/search.png) | ![Detail](./docs/screenshots/detail.png) |
+| Home Page                             | Search Results                            | Hotel Detail                              |
+| ------------------------------------- | ----------------------------------------- | ----------------------------------------- |
+| ![Home](./docs/screenshots/home.jpeg) | ![Search](./docs/screenshots/search.jpeg) | ![Detail](./docs/screenshots/detail.jpeg) |
 
-| Booking Flow                               | Confirmation                                         |
-| ------------------------------------------ | ---------------------------------------------------- |
-| ![Booking](./docs/screenshots/booking.png) | ![Confirmation](./docs/screenshots/confirmation.png) |
+| Booking Flow                                | Confirmation                                          |
+| ------------------------------------------- | ----------------------------------------------------- |
+| ![Booking](./docs/screenshots/booking.jpeg) | ![Confirmation](./docs/screenshots/confirmation.jpeg) |
 
 ## ✨ Features
 
