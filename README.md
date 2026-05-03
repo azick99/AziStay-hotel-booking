@@ -10,8 +10,6 @@ built as a portfolio project to demonstrate frontend engineering skills.
 🔗 **Live Demo:** [azistay.vercel.app](https://azistay.vercel.app)
 📁 **GitHub:** [github.com/yourusername/azistay](https://github.com/azick99/azistay)
 
-## 📸 Screenshots
-
 ---
 
 ## 📸 Screenshots
