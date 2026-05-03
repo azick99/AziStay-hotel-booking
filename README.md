@@ -8,7 +8,7 @@ built as a portfolio project to demonstrate frontend engineering skills.
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 🔗 **Live Demo:** [azistay.vercel.app](https://azistay.vercel.app)
-📁 **GitHub:** [github.com/yourusername/azistay](https://github.com/azick99/azistay)
+📁 **GitHub:** [github.com/azick99/azistay](https://github.com/azick99/azistay)
 
 ## 📸 Screenshots
 
@@ -215,7 +215,7 @@ This is a **frontend-focused portfolio project**, so:
 **Your Name**
 
 - Portfolio: https://https://azizbek-3-d-portfolio.vercel.app
-- LinkedIn: https://linkedin.com/in/yourprofile
+- LinkedIn: https://www.linkedin.com/in/azizbek-yunusaliev-6b060b232/
 - GitHub: https://github.com/azick99
 
 ---
@@ -244,6 +244,7 @@ npm run build
 git add .
 git commit -m "feat: production ready"
 git push
+
 ```
 
 Then on Vercel:
