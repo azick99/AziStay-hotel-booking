@@ -68,6 +68,10 @@ Booking
 ](./docs/screenshots/booking.png)
 |
 !
+[
+AI
+](./docs/screenshots/ai-planner.png)
+|
 
 ---
 
