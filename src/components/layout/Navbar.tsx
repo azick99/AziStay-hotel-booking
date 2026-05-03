@@ -1,7 +1,7 @@
 // src/components/layout/Navbar.tsx
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Plane, Sparkles, Moon, Sun, Menu } from "lucide-react";
+import { Plane, Sparkles, Moon, Sun, Menu, Monitor } from "lucide-react";
 import { cn } from "../../lib/utils";
 
 import { Button } from "@/components/ui/button";
@@ -19,16 +19,29 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Separator } from "@/components/ui/separator";
 import { SignInButton, SignUpButton, useAuth, UserButton } from "@clerk/react";
+import { useTheme } from "@/hooks/useTheme";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileOpen, setMobileOpen] = useState(false);
-  const [isDark, setIsDark] = useState(false);
+  const { isDark, theme, setTheme } = useTheme();
+
   const location = useLocation();
   const { isSignedIn, isLoaded } = useAuth();
-
   const isHome = location.pathname === "/";
   const isTransparent = isHome && !isScrolled && !isMobileOpen;
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -71,7 +84,7 @@ export default function Navbar() {
                 isTransparent ? "text-white" : "text-gray-900 dark:text-white",
               )}
             >
-              Az<span className="text-brand-300">Stay</span>
+              Azi<span className="text-brand-300">Stay</span>
             </span>
           </Link>
 
@@ -107,7 +120,16 @@ export default function Navbar() {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => setIsDark(!isDark)}
+              onClick={() => {
+                // Cycle: system → light → dark → system
+                const next: Record<string, "light" | "dark" | "system"> = {
+                  system: "light",
+                  light: "dark",
+                  dark: "system",
+                };
+                setTheme(next[theme]);
+              }}
+              title={`Theme: ${theme}`}
               className={cn(
                 "rounded-xl transition-all duration-200",
                 isTransparent
@@ -115,13 +137,12 @@ export default function Navbar() {
                   : "text-gray-500 hover:text-gray-900 hover:bg-gray-100 dark:hover:bg-gray-800",
               )}
             >
-              {isDark ? (
-                <Sun className="w-5 h-5" />
-              ) : (
-                <Moon className="w-5 h-5" />
-              )}
+              {/* Show icon based on current theme setting */}
+              {theme === "dark" && <Moon className="w-5 h-5" />}
+              {theme === "light" && <Sun className="w-5 h-5" />}
+              {theme === "system" && <Monitor className="w-5 h-5" />}{" "}
+              {/* add Monitor to lucide imports */}
             </Button>
-
             {/* ── Desktop Auth ── */}
             {isLoaded && (
               <div className="hidden md:flex items-center gap-2">
@@ -162,7 +183,6 @@ export default function Navbar() {
                 )}
               </div>
             )}
-
             {/* ── Mobile Sheet ── */}
             <Sheet
               open={isMobileOpen}

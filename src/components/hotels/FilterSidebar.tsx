@@ -104,7 +104,7 @@ export default function FilterSidebar({ filters, onChange, onClear }: Props) {
           <SelectTrigger className="rounded-xl text-sm border-neutral-200 dark:border-neutral-700">
             <SelectValue />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className=" bg-white/95 dark:bg-gray-700">
             {SORT_OPTIONS.map((o) => (
               <SelectItem
                 key={o.value}
