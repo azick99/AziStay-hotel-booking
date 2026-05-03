@@ -3,7 +3,9 @@ import { Suspense, lazy } from "react";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import PageLoader from "./components/layout/PageLoader";
-import './App.css';
+import "./App.css";
+import ProtectedRoute from "./components/auth/ProtectedRoute";
+
 // Lazy load pages for better performance
 const HomePage = lazy(() => import("./pages/HomePage"));
 const SearchResultsPage = lazy(() => import("./pages/SearchResultsPage"));
@@ -11,6 +13,8 @@ const HotelDetailPage = lazy(() => import("./pages/HotelDetailPage"));
 const BookingPage = lazy(() => import("./pages/BookingPage"));
 const ConfirmationPage = lazy(() => import("./pages/ConfermationPage"));
 const AITripPlannerPage = lazy(() => import("./pages/AITripPlannerPage"));
+const SignInPage = lazy(() => import("./pages/SignInPage"));
+const SignUpPage = lazy(() => import("./pages/SignUpPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
 
 export default function App() {
@@ -19,6 +23,7 @@ export default function App() {
       <Navbar />
       <main className="flex-1">
         <Suspense fallback={<PageLoader />}>
+          {/* Public routes */}
           <Routes>
             <Route
               path="/"
@@ -33,17 +38,40 @@ export default function App() {
               element={<HotelDetailPage />}
             />
             <Route
+              path="/sign-in/*"
+              element={<SignInPage />}
+            />
+            <Route
+              path="/sign-up/*"
+              element={<SignUpPage />}
+            />
+
+            {/* Protected routes — must be signed in */}
+            <Route
               path="/booking"
-              element={<BookingPage />}
+              element={
+                <ProtectedRoute>
+                  <BookingPage />
+                </ProtectedRoute>
+              }
             />
             <Route
               path="/confirmation"
-              element={<ConfirmationPage />}
+              element={
+                <ProtectedRoute>
+                  <ConfirmationPage />
+                </ProtectedRoute>
+              }
             />
             <Route
               path="/ai-planner"
-              element={<AITripPlannerPage />}
+              element={
+                <ProtectedRoute>
+                  <AITripPlannerPage />
+                </ProtectedRoute>
+              }
             />
+
             <Route
               path="*"
               element={<NotFoundPage />}

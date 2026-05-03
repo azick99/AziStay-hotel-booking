@@ -2,8 +2,11 @@ import SearchBar from "@/components/SearchBar";
 import FeaturedDestinations from "@/components/FeaturedDestinations";
 import FeaturedHotels from "@/components/hotels/FeaturedHotels";
 import AIPlannerBanner from "@/components/AIPlannerBanner";
+import { useUser } from "@clerk/react";
 
 export default function HomePage() {
+  const { user, isSignedIn } = useUser();
+
   return (
     <div className="min-h-screen">
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
@@ -43,10 +46,19 @@ export default function HomePage() {
             </div>
 
             {/* Headline */}
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight text-white font-display mb-6">
-              Where Will Your <span className="text-brand-300">Story</span>{" "}
-              Begin?
-            </h1>
+            {isSignedIn ? (
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight text-white font-display mb-6">
+                Welcome back,{" "}
+                <span className="font-semibold text-brand-300 dark:text-white">
+                  {user.firstName ?? user.emailAddresses[0].emailAddress}
+                </span>
+              </h1>
+            ) : (
+              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold leading-tight text-white font-display mb-6">
+                Where Will Your <span className="text-brand-300">Story</span>{" "}
+                Begin?
+              </h1>
+            )}
 
             {/* Subtext */}
             <p className="mx-auto max-w-2xl text-base sm:text-lg text-neutral-200 mb-10">
