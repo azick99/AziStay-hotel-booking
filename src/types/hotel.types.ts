@@ -1,66 +1,65 @@
 export type Amenity =
-  | "Free Wi-Fi"
-  | "Swimming Pool"
-  | "Gym"
-  | "Spa"
-  | "Restaurant"
-  | "Bar"
-  | "Parking"
-  | "Airport Shuttle";
+  | "wifi"
+  | "pool"
+  | "spa"
+  | "gym"
+  | "restaurant"
+  | "bar"
+  | "parking"
+  | "pet-friendly"
+  | "beach-access"
+  | "room-service"
+  | "airport-shuttle"
+  | "concierge"
+  | "business-center"
+  | "kids-club";
 
-export type Catergory =
-  | "luxury"
-  | "boutique"
-  | "resort"
-  | "budget"
-  | "business";
-
-export type Location = {
+export interface HotelLocation {
   city: string;
   country: string;
   address: string;
-  latitude: number;
-  longitude: number;
-};
+  lat: number;
+  lng: number;
+}
 
-export type Room = {
+export interface Room {
   id: string;
   name: string;
   description: string;
   pricePerNight: number;
   maxGuests: number;
-  bedType?: "Single" | "Double" | "Queen" | "King";
-  beds: string;
-  size: number; // in square meters
+  beds: string; // e.g. "1 King Bed"
+  size: number; // sqm
+  images: string[];
   amenities: string[];
   available: boolean;
-};
+}
 
-export type Review = {
+export interface Review {
   id: string;
-  hotelId?: string;
   author: string;
   avatar: string;
   rating: number;
   date: string;
   comment: string;
   helpful: number;
-};
+}
 
-export type Hotel = {
+export interface Hotel {
   id: string;
   name: string;
   tagline: string;
   description: string;
-  location: Location;
-  stars: number;
-  rating: number;
-  pricePerNight: number;
-  images: string[];
+  location: HotelLocation;
+  stars: 1 | 2 | 3 | 4 | 5;
+  rating: number; // 1.0 – 10.0
+  reviewCount: number;
+  pricePerNight: number; // lowest room price
+  images: string[]; // [0] = cover image
   amenities: Amenity[];
   rooms: Room[];
   reviews: Review[];
   featured: boolean;
-  category: Catergory;
-  tags: string[];
-};
+  category: "luxury" | "boutique" | "resort" | "budget" | "business";
+  tags: string[]; // e.g. ['beach', 'romantic', 'family']
+}

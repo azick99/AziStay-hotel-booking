@@ -1,6 +1,6 @@
 import type { Hotel } from "@/types/hotel.types";
 
-export const mockHotels = [
+export const mockHotels: Hotel[] = [
   {
     id: 'h1',
     name: 'The Grand Azure',

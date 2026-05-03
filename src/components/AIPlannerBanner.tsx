@@ -16,7 +16,7 @@ export default function AIPlannerBanner() {
       />
 
       {/* Single soft glow on the right */}
-      <div className="absolute right-0 top-0 h-full w-1/2 bg-gradient-to-l from-brand-500/30 to-transparent pointer-events-none" />
+      <div className="absolute right-0 top-0 h-full w-1/2 bg-linear-to-l from-brand-500/30 to-transparent pointer-events-none" />
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 sm:py-16">

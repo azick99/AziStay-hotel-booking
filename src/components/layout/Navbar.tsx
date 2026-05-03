@@ -53,7 +53,7 @@ export default function Navbar() {
       )}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 lg:h-20">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link
             to="/"
@@ -68,7 +68,7 @@ export default function Navbar() {
                 isTransparent ? "text-white" : "text-gray-900 dark:text-white",
               )}
             >
-              Azi
+              AZ
               <span className="text-brand-300">
 
               Stay

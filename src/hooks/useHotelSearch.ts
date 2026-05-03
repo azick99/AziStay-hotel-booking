@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { mockHotels } from "@/data/mockHotels";
+import type { Amenity } from "@/types/hotel.types";
 
 export type SortOption =
   | "price_asc"
@@ -12,7 +13,7 @@ export type Filters = {
   priceMax: number;
   stars: number[];
   categories: string[];
-  amenities: string[];
+  amenities: Amenity[];
   sortBy: SortOption;
 };
 
