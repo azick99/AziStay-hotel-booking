@@ -56,6 +56,10 @@ const amenityIcons: Record<string, { icon: React.ReactNode; label: string }> = {
   },
 };
 
+const toISO = (d: Date) => d.toISOString().split("T")[0];
+const DEFAULT_CHECKIN = toISO(new Date(Date.now() + 86_400_000));
+const DEFAULT_CHECKOUT = toISO(new Date(Date.now() + 86_400_000 * 3));
+
 export default function HotelDetailPage() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -94,7 +98,15 @@ export default function HotelDetailPage() {
 
   const handleBookNow = () => {
     if (!selectedRoom) return;
-    setBooking({ hotel, room: selectedRoom, checkIn, checkOut, guests });
+
+    setBooking({
+      hotel,
+      room: selectedRoom,
+      checkIn: checkIn || DEFAULT_CHECKIN,
+      checkOut: checkOut || DEFAULT_CHECKOUT,
+      guests: guests || 1,
+    });
+
     navigate("/booking");
   };
 

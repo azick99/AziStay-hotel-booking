@@ -26,18 +26,6 @@ import {
   useBookingStore,
 } from "@/store/useBookingStore";
 
-type PriceSummaryProps = {
-  room: {
-    name: string;
-    pricePerNight: number;
-  };
-  nights: number;
-  roomTotal: number;
-  taxes: number;
-  resortFee: number;
-  total: number;
-};
-
 // ── Zod schema ──────────────────────────────────────────────────
 const guestSchema = z.object({
   firstName: z.string().min(1, "First name is required"),
@@ -62,38 +50,61 @@ const Section = ({ children }: { children: React.ReactNode }) => (
   </motion.div>
 );
 
-// ── Price summary sub-component (reused in step 3) ─────────────
+// ── Move this OUTSIDE BookingPage, at the top of the file ──────
+// Place it right after your imports, before the BookingPage function
+
+interface PriceSummaryProps {
+  roomName: string;
+  nights: number;
+  pricePerNight: number;
+  roomTotal: number;
+  taxes: number;
+  resortFee: number;
+  total: number;
+}
+
 const PriceSummary = ({
-  room,
+  roomName,
   nights,
+  pricePerNight,
   roomTotal,
   taxes,
   resortFee,
   total,
-}: PriceSummaryProps) => (
-  <div className="flex flex-col gap-2 text-sm">
-    <div className="flex justify-between text-neutral-600 dark:text-neutral-400">
-      <span>
-        {room.name} ({nights} night{nights > 1 ? "s" : ""} × $
-        {room.pricePerNight})
-      </span>
-      <span>${roomTotal.toLocaleString()}</span>
+}: PriceSummaryProps) => {
+  // No dates selected yet — show placeholder
+  if (nights === 0) {
+    return (
+      <p className="text-sm text-neutral-400 text-center py-2">
+        Select check-in and check-out dates to see pricing
+      </p>
+    );
+  }
+
+  return (
+    <div className="flex flex-col gap-2 text-sm">
+      <div className="flex justify-between text-neutral-600 dark:text-neutral-400">
+        <span>
+          {roomName} ({nights} night{nights > 1 ? "s" : ""} × ${pricePerNight})
+        </span>
+        <span>${roomTotal.toLocaleString()}</span>
+      </div>
+      <div className="flex justify-between text-neutral-600 dark:text-neutral-400">
+        <span>Taxes & Fees (15%)</span>
+        <span>${taxes}</span>
+      </div>
+      <div className="flex justify-between text-neutral-600 dark:text-neutral-400">
+        <span>Resort Fee</span>
+        <span>${resortFee}</span>
+      </div>
+      <Separator />
+      <div className="flex justify-between font-bold text-neutral-900 dark:text-white text-base">
+        <span>Total</span>
+        <span>${total.toLocaleString()}</span>
+      </div>
     </div>
-    <div className="flex justify-between text-neutral-600 dark:text-neutral-400">
-      <span>Taxes & Fees (15%)</span>
-      <span>${taxes}</span>
-    </div>
-    <div className="flex justify-between text-neutral-600 dark:text-neutral-400">
-      <span>Resort Fee</span>
-      <span>${resortFee}</span>
-    </div>
-    <Separator />
-    <div className="flex justify-between font-bold text-neutral-900 dark:text-white text-base">
-      <span>Total</span>
-      <span>${total.toLocaleString()}</span>
-    </div>
-  </div>
-);
+  );
+};
 
 export default function BookingPage() {
   const navigate = useNavigate();
@@ -126,13 +137,12 @@ export default function BookingPage() {
 
   if (!hotel || !room) return null;
 
-  const nights = calcNights(checkIn, checkOut);
-  const roomTotal = room.pricePerNight * nights;
+  const nights = calcNights(checkIn, checkOut); // now always a number
+  const roomTotal = (room?.pricePerNight ?? 0) * nights;
   const taxRate = 0.15;
   const taxes = Math.round(roomTotal * taxRate);
   const resortFee = 45;
   const total = roomTotal + taxes + resortFee;
-
   const fmt = (iso: string) => {
     try {
       return format(parseISO(iso), "MMM d, yyyy");
@@ -153,7 +163,7 @@ export default function BookingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950">
+    <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 mt-15">
       {/* Header */}
       <div className="bg-white dark:bg-neutral-900 border-b border-neutral-200 dark:border-neutral-800">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 py-5">
@@ -310,8 +320,9 @@ export default function BookingPage() {
 
               <Separator />
               <PriceSummary
-                room={room}
+                roomName={room.name}
                 nights={nights}
+                pricePerNight={room.pricePerNight}
                 roomTotal={roomTotal}
                 taxes={taxes}
                 resortFee={resortFee}
@@ -531,8 +542,9 @@ export default function BookingPage() {
 
               <Separator />
               <PriceSummary
-                room={room}
+                roomName={room.name}
                 nights={nights}
+                pricePerNight={room.pricePerNight}
                 roomTotal={roomTotal}
                 taxes={taxes}
                 resortFee={resortFee}

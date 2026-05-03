@@ -1,6 +1,5 @@
 # ✈️ AziStay — AI-Powered Hotel Booking Platform
 
-
 A modern, full-featured hotel booking web application with an AI Trip Planner,
 built as a portfolio project to demonstrate frontend engineering skills.
 
@@ -11,9 +10,71 @@ built as a portfolio project to demonstrate frontend engineering skills.
 🔗 **Live Demo:** [azistay.vercel.app](https://azistay.vercel.app)
 📁 **GitHub:** [github.com/yourusername/azistay](https://github.com/azick99/azistay)
 
+## 📸 Screenshots
+
+---
+
+## 📸 Screenshots
+
+|
+Home Page
+|
+Search Results
+|
+Hotel Detail
+|
+|
+
+---
+
+## |
+
+## |
+
+|
+|
+!
+[
+Home
+](./docs/screenshots/home.png)
+|
+!
+[
+Search
+](./docs/screenshots/search.png)
+|
+!
+[
+Detail
+](./docs/screenshots/detail.png)
+|
+
+|
+Booking Flow
+|
+AI Trip Planner
+|
+|
+
+---
+
+## |
+
+|
+|
+!
+[
+Booking
+](./docs/screenshots/booking.png)
+|
+!
+
+---
+
 ## ✨ Features
 
 ### 🏨 Core Booking Experience
+
 - 🔍 **Hotel Search** — Search by destination, dates, and guest count
 - 🎛️ **Advanced Filters** — Filter by price, star rating, category, and amenities
 - 🖼️ **Photo Gallery** — Full-screen lightbox with keyboard navigation
@@ -21,19 +82,22 @@ built as a portfolio project to demonstrate frontend engineering skills.
 - 📋 **Multi-Step Booking** — Guided 3-step booking flow with validation
 - ✅ **Booking Confirmation** — Unique booking reference generation
 
-### 🤖 AI Trip Planner *(Phase 3 — Coming Soon)*
+### 🤖 AI Trip Planner _(Phase 3 — Coming Soon)_
+
 - Natural language trip planning powered by AI
 - Personalized hotel recommendations
 - Day-by-day itinerary generation
 - Estimated budget breakdown
 
 ### 🔐 Authentication
+
 - Secure sign-in / sign-up via **Clerk**
 - Google & GitHub social login
 - Protected routes for booking and AI planner
 - User profile management
 
 ### 🎨 UI/UX
+
 - Fully **responsive** — mobile-first design
 - **Dark mode** toggle
 - Smooth animations with **Framer Motion**
@@ -44,25 +108,26 @@ built as a portfolio project to demonstrate frontend engineering skills.
 
 ## 🛠️ Tech Stack
 
-| Category | Technology |
-|---|---|
-| Framework | React 18 + Vite |
-| Language | TypeScript |
-| Styling | Tailwind CSS + shadcn/ui |
-| Routing | React Router v6 |
-| State | Zustand |
-| Auth | Clerk |
-| Forms | React Hook Form + Zod |
-| Animations | Framer Motion |
-| Icons | Lucide React |
-| AI *(Phase 3)* | OpenRouter API (Llama 3.1) |
-| Deployment | Vercel |
+| Category       | Technology                 |
+| -------------- | -------------------------- |
+| Framework      | React 18 + Vite            |
+| Language       | TypeScript                 |
+| Styling        | Tailwind CSS + shadcn/ui   |
+| Routing        | React Router v6            |
+| State          | Zustand                    |
+| Auth           | Clerk                      |
+| Forms          | React Hook Form + Zod      |
+| Animations     | Framer Motion              |
+| Icons          | Lucide React               |
+| AI _(Phase 3)_ | OpenRouter API (Llama 3.1) |
+| Deployment     | Vercel                     |
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
+
 - Node.js 18+
 - npm or yarn
 - Clerk account (free at [clerk.com](https://clerk.com))
@@ -85,9 +150,12 @@ cp .env.example .env
 npm run dev
 
 ```
+
 # 5. Open in browser
+
 http://localhost:5173
-```
+
+````
 
 ---
 
@@ -101,7 +169,7 @@ VITE_CLERK_PUBLISHABLE_KEY=pk_test_xxxxxxxxxxxxxxxx
 
 # AI Provider - Phase 3 (optional)
 VITE_OPENROUTER_API_KEY=sk-or-xxxxxxxxxxxxxxxx
-```
+````
 
 👉 Get your Clerk key at: https://clerk.com → Create Application → API Keys
 
@@ -133,42 +201,42 @@ src/
 
 ### ✅ Phase 1 — Foundation (Complete)
 
-* Vite + React + TypeScript setup
-* Tailwind CSS + shadcn/ui
-* Routing structure
-* Mock hotel data
-* Navbar + Footer
+- Vite + React + TypeScript setup
+- Tailwind CSS + shadcn/ui
+- Routing structure
+- Mock hotel data
+- Navbar + Footer
 
 ### ✅ Phase 2 — Core Booking UI (Complete)
 
-* Hero section + SearchBar
-* Search results with filters + sorting
-* Hotel detail page
-* Room selection
-* Multi-step booking flow
-* Booking confirmation
-* Clerk authentication
+- Hero section + SearchBar
+- Search results with filters + sorting
+- Hotel detail page
+- Room selection
+- Multi-step booking flow
+- Booking confirmation
+- Clerk authentication
 
 ### 🔄 Phase 3 — AI Trip Planner (In Progress)
 
-* OpenRouter API integration
-* Chat UI with memory
-* AI-generated itineraries
-* Budget breakdown
-* Smart hotel recommendations
+- OpenRouter API integration
+- Chat UI with memory
+- AI-generated itineraries
+- Budget breakdown
+- Smart hotel recommendations
 
 ### 🔮 Phase 4 — Future Improvements
 
-* Real hotel API (Amadeus / RapidAPI)
-* Interactive maps (Leaflet)
-* Booking history page
-* Wishlist / saved hotels
-* Email confirmations
-* Admin dashboard
-* i18n (multi-language)
-* Performance optimizations
-* Testing (Vitest + Testing Library)
-* PWA support
+- Real hotel API (Amadeus / RapidAPI)
+- Interactive maps (Leaflet)
+- Booking history page
+- Wishlist / saved hotels
+- Email confirmations
+- Admin dashboard
+- i18n (multi-language)
+- Performance optimizations
+- Testing (Vitest + Testing Library)
+- PWA support
 
 ---
 
@@ -176,20 +244,20 @@ src/
 
 This is a **frontend-focused portfolio project**, so:
 
-* ❌ No real payments (UI only — no Stripe)
-* ❌ No backend (fully client-side)
-* ❌ Uses mock hotel data (no real availability)
-* ❌ AI responses are simulated / partial
+- ❌ No real payments (UI only — no Stripe)
+- ❌ No backend (fully client-side)
+- ❌ Uses mock hotel data (no real availability)
+- ❌ AI responses are simulated / partial
 
 ---
 
 ## 🙏 Credits
 
-* Images — Unsplash
-* Avatars — Pravatar
-* UI — shadcn/ui
-* Auth — Clerk
-* Icons — Lucide
+- Images — Unsplash
+- Avatars — Pravatar
+- UI — shadcn/ui
+- Auth — Clerk
+- Icons — Lucide
 
 ---
 
@@ -197,9 +265,9 @@ This is a **frontend-focused portfolio project**, so:
 
 **Your Name**
 
-* Portfolio: https://https://azizbek-3-d-portfolio.vercel.app
-* LinkedIn: https://linkedin.com/in/yourprofile
-* GitHub: https://github.com/azick99
+- Portfolio: https://https://azizbek-3-d-portfolio.vercel.app
+- LinkedIn: https://linkedin.com/in/yourprofile
+- GitHub: https://github.com/azick99
 
 ---
 
@@ -231,9 +299,10 @@ git push
 
 Then on Vercel:
 
-* Import GitHub repo
-* Add environment variables
-* Deploy 🚀
+- Import GitHub repo
+- Add environment variables
+- Deploy 🚀
 
 ```
+
 ```

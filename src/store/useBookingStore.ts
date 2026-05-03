@@ -48,20 +48,39 @@ export const useBookingStore = create<BookingState>()(
 
       clearBooking: () => set(initialState),
     }),
-    { name: "azistay-booking" }
-  )
+    { name: "azistay-booking" },
+  ),
 );
 
 export function generateBookingRef(): string {
   const chars = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
   const segment = (len: number) =>
-    Array.from({ length: len }, () => chars[Math.floor(Math.random() * chars.length)]).join("");
+    Array.from(
+      { length: len },
+      () => chars[Math.floor(Math.random() * chars.length)],
+    ).join("");
   return `WDR-${segment(6)}`;
 }
 
+// src/store/useBookingStore.ts
+
 export function calcNights(checkIn: string, checkOut: string): number {
-  const a = new Date(checkIn);
-  const b = new Date(checkOut);
-  const diff = (b.getTime() - a.getTime()) / (1000 * 60 * 60 * 24);
-  return Math.max(1, Math.round(diff));
+  // Guard — if either date is missing return 0
+  if (!checkIn || !checkOut) return 0;
+
+  try {
+    const start = new Date(checkIn);
+    const end = new Date(checkOut);
+
+    // Guard — if dates are invalid return 0
+    if (isNaN(start.getTime()) || isNaN(end.getTime())) return 0;
+
+    const diff = end.getTime() - start.getTime();
+    const nights = Math.round(diff / (1000 * 60 * 60 * 24));
+
+    // Guard — never return negative nights
+    return Math.max(0, nights);
+  } catch {
+    return 0;
+  }
 }
