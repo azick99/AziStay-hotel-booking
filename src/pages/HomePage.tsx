@@ -5,7 +5,7 @@ import AIPlannerBanner from "@/components/AIPlannerBanner";
 
 export default function HomePage() {
   return (
-    <main className="min-h-screen">
+    <div className="min-h-screen">
       {/* ── Hero ─────────────────────────────────────────────────────────── */}
       <section className="relative flex items-center justify-center min-h-screen px-4 sm:px-6 lg:px-8 py-16 overflow-hidden pt-24 sm:pt-28">
         {/* Background video */}
@@ -87,6 +87,6 @@ export default function HomePage() {
       <AIPlannerBanner />
       {/* ── Featured Hotels ───────────────────────────────────────────────── */}
       <FeaturedHotels />
-    </main>
+    </div>
   );
 }
