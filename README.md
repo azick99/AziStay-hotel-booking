@@ -11,20 +11,6 @@ built as a portfolio project to demonstrate frontend engineering skills.
 🔗 **Live Demo:** [azistay.vercel.app](https://azistay.vercel.app)
 📁 **GitHub:** [github.com/yourusername/azistay](https://github.com/azick99/azistay)
 
----
-
-## 📸 Screenshots
-
-| Home Page | Search Results | Hotel Detail |
-|---|---|---|
-| ![Home](./docs/screenshots/home.png) | ![Search](./docs/screenshots/search.png) | ![Detail](./docs/screenshots/detail.png) |
-
-| Booking Flow | AI Trip Planner |
-|---|---|
-| ![Booking](./docs/screenshots/booking.png) | ![AI](./docs/screenshots/ai-planner.png) |
-
----
-
 ## ✨ Features
 
 ### 🏨 Core Booking Experience
