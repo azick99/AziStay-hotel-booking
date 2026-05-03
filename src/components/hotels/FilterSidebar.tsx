@@ -13,6 +13,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { type Filters, type SortOption } from "@/hooks/useHotelSearch";
+import type { Amenity, Hotel } from "@/types/hotel.types";
 
 type Props = {
   filters: Filters;
@@ -22,28 +23,28 @@ type Props = {
 
 const STAR_OPTIONS = [3, 4, 5];
 
-const CATEGORY_OPTIONS = [
-  { value: "luxury",   label: "Luxury" },
+const CATEGORY_OPTIONS: { value: Hotel["category"]; label: string }[] = [
+  { value: "luxury", label: "Luxury" },
   { value: "boutique", label: "Boutique" },
-  { value: "resort",   label: "Resort" },
+  { value: "resort", label: "Resort" },
   { value: "business", label: "Business" },
 ];
 
-const AMENITY_OPTIONS = [
-  { value: "pool",          label: "Swimming Pool" },
-  { value: "spa",           label: "Spa" },
-  { value: "gym",           label: "Gym" },
-  { value: "wifi",          label: "Free WiFi" },
-  { value: "restaurant",    label: "Restaurant" },
-  { value: "parking",       label: "Parking" },
-  { value: "pet-friendly",  label: "Pet Friendly" },
-  { value: "beach-access",  label: "Beach Access" },
+const AMENITY_OPTIONS: { value: Amenity; label: string }[] = [
+  { value: "pool", label: "Swimming Pool" },
+  { value: "spa", label: "Spa" },
+  { value: "gym", label: "Gym" },
+  { value: "wifi", label: "Free WiFi" },
+  { value: "restaurant", label: "Restaurant" },
+  { value: "parking", label: "Parking" },
+  { value: "pet-friendly", label: "Pet Friendly" },
+  { value: "beach-access", label: "Beach Access" },
 ];
 
 const SORT_OPTIONS: { value: SortOption; label: string }[] = [
-  { value: "rating_desc",   label: "Top Rated" },
-  { value: "price_asc",     label: "Price: Low → High" },
-  { value: "price_desc",    label: "Price: High → Low" },
+  { value: "rating_desc", label: "Top Rated" },
+  { value: "price_asc", label: "Price: Low → High" },
+  { value: "price_desc", label: "Price: High → Low" },
   { value: "most_reviewed", label: "Most Reviewed" },
 ];
 
@@ -51,7 +52,13 @@ function toggle<T>(arr: T[], val: T): T[] {
   return arr.includes(val) ? arr.filter((v) => v !== val) : [...arr, val];
 }
 
-function FilterSection({ title, children }: { title: string; children: React.ReactNode }) {
+function FilterSection({
+  title,
+  children,
+}: {
+  title: string;
+  children: React.ReactNode;
+}) {
   return (
     <div className="flex flex-col gap-3">
       <p className="text-xs font-bold uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
@@ -99,7 +106,10 @@ export default function FilterSidebar({ filters, onChange, onClear }: Props) {
           </SelectTrigger>
           <SelectContent>
             {SORT_OPTIONS.map((o) => (
-              <SelectItem key={o.value} value={o.value}>
+              <SelectItem
+                key={o.value}
+                value={o.value}
+              >
                 {o.label}
               </SelectItem>
             ))}
@@ -194,7 +204,10 @@ export default function FilterSidebar({ filters, onChange, onClear }: Props) {
                   id={`cat-${cat.value}`}
                   checked={checked}
                   onCheckedChange={() =>
-                    onChange("categories", toggle(filters.categories, cat.value))
+                    onChange(
+                      "categories",
+                      toggle(filters.categories, cat.value),
+                    )
                   }
                 />
                 <Label
