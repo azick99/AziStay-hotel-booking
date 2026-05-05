@@ -41,7 +41,7 @@ const initialState = {
 
 export const useBookingStore = create<BookingState>()(
   persist(
-    (set, get) => ({
+    (set) => ({
       ...initialState,
       bookingHistory: [],
 
