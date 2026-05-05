@@ -1,6 +1,7 @@
+// src/types/ai.types.ts
 export interface ChatMessage {
   id: string;
-  role: 'user' | 'assistant';
+  role: "user" | "assistant";
   content: string;
   tripData?: TripSuggestion;
   timestamp: Date;
@@ -34,9 +35,9 @@ export interface BudgetBreakdown {
 
 export interface TripSuggestion {
   message: string;
+  destination: string;
+  duration: number;
   hotels: AIHotel[];
   itinerary: ItineraryDay[];
   budgetBreakdown: BudgetBreakdown;
-  destination: string;
-  duration: number;
 }

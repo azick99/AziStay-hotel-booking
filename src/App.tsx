@@ -65,11 +65,7 @@ export default function App() {
             />
             <Route
               path="/ai-planner"
-              element={
-                <ProtectedRoute>
-                  <AITripPlannerPage />
-                </ProtectedRoute>
-              }
+              element={<AITripPlannerPage />}
             />
 
             <Route
