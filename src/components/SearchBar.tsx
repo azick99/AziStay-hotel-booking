@@ -17,8 +17,10 @@ type SearchData = {
   checkOut: Date;
   guests: number;
 };
-
-const SearchBar = () => {
+type SearchBarProps = {
+  onSearch?: () => void; // ✅ callback to close the panel after search
+};
+const SearchBar = ({ onSearch }: SearchBarProps) => {
   const navigate = useNavigate();
 
   const { today, tomorrow } = useMemo(() => {
@@ -68,6 +70,7 @@ const SearchBar = () => {
       guests: String(searchData.guests),
     }).toString();
     navigate(`/search?${query}`);
+    onSearch?.(); // ✅ close the panel after navigating
   };
 
   const fieldLabel = (text: string) => (

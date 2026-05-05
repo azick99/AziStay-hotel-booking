@@ -57,19 +57,19 @@ built as a portfolio project to demonstrate frontend engineering skills.
 
 ## 🛠️ Tech Stack
 
-| Category       | Technology                 |
-| -------------- | -------------------------- |
-| Framework      | React 18 + Vite            |
-| Language       | TypeScript                 |
-| Styling        | Tailwind CSS + shadcn/ui   |
-| Routing        | React Router v6            |
-| State          | Zustand                    |
-| Auth           | Clerk                      |
-| Forms          | React Hook Form + Zod      |
-| Animations     | Framer Motion              |
-| Icons          | Lucide React               |
-| AI _(Phase 3)_ | OpenRouter API (Llama 3.1) |
-| Deployment     | Vercel                     |
+| Category   | Technology               |
+| ---------- | ------------------------ |
+| Framework  | React 18 + Vite          |
+| Language   | TypeScript               |
+| Styling    | Tailwind CSS + shadcn/ui |
+| Routing    | React Router v6          |
+| State      | Zustand                  |
+| Auth       | Clerk                    |
+| Forms      | React Hook Form + Zod    |
+| Animations | Framer Motion            |
+| Icons      | Lucide React             |
+| AI         | Gemini (flash 2.5 late)  |
+| Deployment | Vercel                   |
 
 ---
 
@@ -117,7 +117,7 @@ Create a `.env` file in the root directory:
 VITE_CLERK_PUBLISHABLE_KEY=pk_test_xxxxxxxxxxxxxxxx
 
 # AI Provider - Phase 3 (optional)
-VITE_OPENROUTER_API_KEY=sk-or-xxxxxxxxxxxxxxxx
+VITE_GEMINI_API_KEY=Aisxxxxxxxxxxxxxxxx
 ````
 
 👉 Get your Clerk key at: https://clerk.com → Create Application → API Keys
@@ -166,13 +166,39 @@ src/
 - Booking confirmation
 - Clerk authentication
 
-### 🔄 Phase 3 — AI Trip Planner (In Progress)
+### ✅ Phase 3 — AI Trip Planner (Complete)
 
-- OpenRouter API integration
-- Chat UI with memory
-- AI-generated itineraries
-- Budget breakdown
-- Smart hotel recommendations
+```
+Files created:
+  src/ai/prompts.ts              ✅
+  src/ai/parseResponse.ts        ✅
+  src/ai/geminiClient.ts         ✅
+  src/store/useChatStore.ts      ✅
+  src/hooks/useChat.ts           ✅
+  src/components/ai/
+    TypingIndicator.tsx          ✅
+    ChatMessage.tsx              ✅
+    ChatInput.tsx                ✅
+    TripSuggestionCard.tsx       ✅
+    ItineraryView.tsx            ✅
+    BudgetBreakdown.tsx          ✅
+    ResultsPanel.tsx             ✅
+    ChatWindow.tsx               ✅
+  src/pages/AITripPlannerPage.tsx ✅
+
+Environment:
+  VITE_GEMINI_API_KEY in .env    ✅
+  Added to Vercel env vars       ✅
+```
+
+- [x] Google Gemini API integration
+- [x] Natural language trip planning
+- [x] 3 AI-matched hotel recommendations
+- [x] Accordion day-by-day itinerary
+- [x] Animated budget breakdown
+- [x] Chat history with memory
+- [x] Suggestion chips for quick start
+- [x] Mobile responsive split layout
 
 ### 🔮 Phase 4 — Future Improvements
 
