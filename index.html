@@ -2,23 +2,209 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AziStay Hotel Booking</title>
-        <script>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <!-- SVG favicon — Chrome 80+, Firefox, Safari 12+ -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon.svg"
+    />
+    <!-- PNG fallbacks for older browsers -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="/favicon-32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/favicon-16.png"
+    />
+    <!-- Apple home-screen icon (no radius — iOS adds it) -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/apple-touch-icon.png"
+    />
+    <!-- Safari pinned tab — must be a single-color SVG path -->
+    <link
+      rel="mask-icon"
+      href="/favicon.svg"
+      color="#3b5ff7"
+    />
+
+    <!-- PWA manifest -->
+    <link
+      rel="manifest"
+      href="/site.webmanifest"
+    />
+
+    <!-- Browser / OS chrome color — FIXED: was #0f766e (teal starter default) -->
+    <meta
+      name="theme-color"
+      content="#3b5ff7"
+    />
+    <!-- Windows tile -->
+    <meta
+      name="msapplication-TileColor"
+      content="#3b5ff7"
+    />
+
+    <!-- ── Primary SEO ──────────────────────────────────────────────── -->
+    <title>AziStay — Luxury Hotel Booking with AI Trip Planner</title>
+    <meta
+      name="description"
+      content="Discover the world's finest hotels with AziStay. AI-powered recommendations, instant booking, and curated luxury experiences across 195 countries."
+    />
+    <meta
+      name="keywords"
+      content="luxury hotels, hotel booking, AI trip planner, travel, boutique hotels, beach resorts, city breaks, vacation, resort, accommodation"
+    />
+    <meta
+      name="author"
+      content="AziStay"
+    />
+    <meta
+      name="robots"
+      content="index, follow"
+    />
+    <link
+      rel="canonical"
+      href="https://azistay.com/"
+    />
+
+    <!-- ── Open Graph (Facebook · LinkedIn · WhatsApp) ──────────────── -->
+    <!-- FIXED: og:url was pointing at /pwa-icon.svg  -->
+    <!-- FIXED: og:image must be a PNG (1200×630) — SVGs are not rendered by crawlers -->
+    <meta
+      property="og:type"
+      content="website"
+    />
+    <meta
+      property="og:url"
+      content="https://azistay.com/"
+    />
+    <meta
+      property="og:site_name"
+      content="AziStay"
+    />
+    <meta
+      property="og:locale"
+      content="en_US"
+    />
+    <meta
+      property="og:title"
+      content="AziStay — Luxury Hotel Booking with AI Trip Planner"
+    />
+    <meta
+      property="og:description"
+      content="Discover the world's finest hotels with AziStay. AI-powered recommendations, instant booking, and curated luxury experiences across 195 countries."
+    />
+    <!-- PNG required — generate a 1200×630 social card and drop it in /public -->
+    <meta
+      property="og:image"
+      content="https://azistay.com/og-image.png"
+    />
+    <meta
+      property="og:image:type"
+      content="image/png"
+    />
+    <meta
+      property="og:image:width"
+      content="1200"
+    />
+    <meta
+      property="og:image:height"
+      content="630"
+    />
+    <meta
+      property="og:image:alt"
+      content="AziStay — Luxury Hotel Booking"
+    />
+
+    <meta
+      name="twitter:card"
+      content="summary_large_image"
+    />
+    <meta
+      name="twitter:site"
+      content="@azistay"
+    />
+    <meta
+      name="twitter:creator"
+      content="@azistay"
+    />
+    <meta
+      name="twitter:url"
+      content="https://azistay.com/"
+    />
+    <meta
+      name="twitter:title"
+      content="AziStay — Luxury Hotel Booking with AI Trip Planner"
+    />
+    <meta
+      name="twitter:description"
+      content="Discover the world's finest hotels with AziStay. AI-powered recommendations and curated luxury experiences."
+    />
+    <meta
+      name="twitter:image"
+      content="https://azistay.com/og-image.png"
+    />
+    <meta
+      name="twitter:image:alt"
+      content="AziStay — Luxury Hotel Booking"
+    />
+
+    <!-- ── JSON-LD Structured Data — Google rich results ───────────── -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "TravelAgency",
+        "name": "AziStay",
+        "url": "https://azistay.com",
+        "logo": "https://azistay.com/favicon.svg",
+        "description": "AI-powered luxury hotel booking platform with 12,000+ curated properties worldwide.",
+        "sameAs": [
+          "https://twitter.com/azistay",
+          "https://instagram.com/azistay",
+          "https://facebook.com/azistay"
+        ],
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "https://azistay.com/search?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+
+    <!-- ── Dark mode init (flash prevention) ────────────────────────── -->
+    <script>
       (function () {
         const stored = localStorage.getItem("azistay-theme");
         const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
+          "(prefers-color-scheme: dark)",
         ).matches;
         const isDark =
-          stored === "dark" || ((!stored || stored === "system") && prefersDark);
+          stored === "dark" ||
+          ((!stored || stored === "system") && prefersDark);
         if (isDark) document.documentElement.classList.add("dark");
       })();
     </script>
   </head>
+
   <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <script
+      type="module"
+      src="/src/main.tsx"
+    ></script>
   </body>
 </html>

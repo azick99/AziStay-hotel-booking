@@ -3,6 +3,8 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import { BrowserRouter } from "react-router";
 import { ClerkProvider } from "@clerk/react";
+import "leaflet/dist/leaflet.css";
+import "./lib/leafletFix";
 
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 

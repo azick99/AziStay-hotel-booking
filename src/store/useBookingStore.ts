@@ -1,4 +1,5 @@
 import type { Hotel, Room } from "@/types/hotel.types";
+import type { CompletedBooking } from "@/types/booking.types";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -18,11 +19,14 @@ export type BookingState = {
   guests: number;
   guestDetails: BookingGuest | null;
   bookingRef: string | null;
+  bookingHistory: CompletedBooking[];
 
   setBooking: (data: Partial<BookingState>) => void;
   setGuestDetails: (details: BookingGuest) => void;
   setBookingRef: (ref: string) => void;
+  addBookingHistory: (booking: CompletedBooking) => void;
   clearBooking: () => void;
+  clearBookingHistory: () => void;
 };
 
 const initialState = {
@@ -37,8 +41,9 @@ const initialState = {
 
 export const useBookingStore = create<BookingState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       ...initialState,
+      bookingHistory: [],
 
       setBooking: (data) => set((state) => ({ ...state, ...data })),
 
@@ -46,7 +51,14 @@ export const useBookingStore = create<BookingState>()(
 
       setBookingRef: (ref) => set({ bookingRef: ref }),
 
+      addBookingHistory: (booking) =>
+        set((state) => ({
+          bookingHistory: [...state.bookingHistory, booking],
+        })),
+
       clearBooking: () => set(initialState),
+
+      clearBookingHistory: () => set({ bookingHistory: [] }),
     }),
     { name: "azistay-booking" },
   ),

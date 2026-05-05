@@ -24,6 +24,29 @@ export interface Booking {
   ref: string;
   details: BookingDetails;
   guest: BookingGuest;
-  status: 'pending' | 'confirmed' | 'cancelled';
+  status: "pending" | "confirmed" | "cancelled";
   createdAt: Date;
+}
+
+export interface CompletedBooking {
+  id: string;
+  ref: string;
+  hotelId: string;
+  hotelName: string;
+  roomId: string;
+  roomName: string;
+  city: string;
+  country: string;
+  image: string;
+  checkIn: string;
+  checkOut: string;
+  guests: number;
+  nights: number;
+  pricePerNight: number;
+  total: number;
+  taxes: number;
+  resortFee: number;
+  grandTotal: number;
+  status: "confirmed";
+  createdAt: string;
 }

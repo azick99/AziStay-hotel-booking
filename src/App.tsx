@@ -13,6 +13,8 @@ const HotelDetailPage = lazy(() => import("./pages/HotelDetailPage"));
 const BookingPage = lazy(() => import("./pages/BookingPage"));
 const ConfirmationPage = lazy(() => import("./pages/ConfermationPage"));
 const AITripPlannerPage = lazy(() => import("./pages/AITripPlannerPage"));
+const WishlistPage = lazy(() => import("./pages/WishlistPage"));
+const BookingHistoryPage = lazy(() => import("./pages/BookingHistoryPage"));
 const SignInPage = lazy(() => import("./pages/SignInPage"));
 const SignUpPage = lazy(() => import("./pages/SignUpPage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
@@ -38,6 +40,10 @@ export default function App() {
               element={<HotelDetailPage />}
             />
             <Route
+              path="/wishlist"
+              element={<WishlistPage />}
+            />
+            <Route
               path="/sign-in/*"
               element={<SignInPage />}
             />
@@ -52,6 +58,14 @@ export default function App() {
               element={
                 <ProtectedRoute>
                   <BookingPage />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/bookings"
+              element={
+                <ProtectedRoute>
+                  <BookingHistoryPage />
                 </ProtectedRoute>
               }
             />

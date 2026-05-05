@@ -30,6 +30,7 @@ import { getHotelById } from "@/data/mockHotels";
 import PhotoGallery from "@/components/hotels/PhotoGallery";
 import RoomCard from "@/components/hotels/RoomCard";
 import ReviewsSection from "@/components/hotels/ReviewsSection";
+import WishlistButton from "@/components/hotels/WishlistButton";
 import { useBookingStore } from "@/store/useBookingStore";
 import type { Room } from "@/types/hotel.types";
 
@@ -171,9 +172,12 @@ export default function HotelDetailPage() {
                     {hotel.category}
                   </span>
                 </div>
-                <h1 className="font-display text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white">
-                  {hotel.name}
-                </h1>
+                <div className="flex flex-wrap items-center gap-3">
+                  <h1 className="font-display text-3xl sm:text-4xl font-bold text-neutral-900 dark:text-white">
+                    {hotel.name}
+                  </h1>
+                  <WishlistButton hotelId={hotel.id} />
+                </div>
                 <p className="text-neutral-500 dark:text-neutral-400 italic">
                   {hotel.tagline}
                 </p>

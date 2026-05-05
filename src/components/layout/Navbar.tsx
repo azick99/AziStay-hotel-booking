@@ -38,24 +38,13 @@ export default function Navbar() {
   }, []);
 
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
     document.documentElement.classList.toggle("dark", isDark);
   }, [isDark]);
 
   const navLinks = [
     { label: "Hotels", href: "/search" },
-    { label: "Destinations", href: "/search?type=destinations" },
+    { label: "Wishlist", href: "/wishlist" },
+    { label: "Bookings", href: "/bookings" },
     { label: "AI Planner", href: "/ai-planner", highlight: true },
   ];
 

@@ -3,6 +3,8 @@ import { useSearchParams } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { SlidersHorizontal, X, SearchX } from "lucide-react";
 import { format, parseISO } from "date-fns";
+import type { Hotel } from "@/types/hotel.types";
+import HotelMap from "@/components/hotels/HotelMaps";
 
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
@@ -24,6 +26,8 @@ export default function SearchResultsPage() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
 
   const [searchOpen, setSearchOpen] = useState(false);
+  const [viewMode, setViewMode] = useState<"grid" | "map">("grid");
+  const [selectedHotel, setSelectedHotel] = useState<Hotel | null>(null);
 
   // Read URL params
   const destination = searchParams.get("destination") ?? "";
@@ -180,6 +184,30 @@ export default function SearchResultsPage() {
             </h1>
           </div>
 
+          <div className="flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setViewMode("grid")}
+              className={`rounded-full border px-4 py-2 text-sm font-medium transition-all duration-200 ${
+                viewMode === "grid"
+                  ? "bg-brand-500 text-white"
+                  : "bg-transparent text-neutral-600 dark:text-neutral-300 border-neutral-200 dark:border-neutral-700 hover:border-neutral-300"
+              }`}
+            >
+              Grid
+            </button>
+            <button
+              type="button"
+              onClick={() => setViewMode("map")}
+              className={`rounded-full border px-4 py-2 text-sm font-medium transition-all duration-200 ${
+                viewMode === "map"
+                  ? "bg-brand-500 text-white"
+                  : "bg-transparent text-neutral-600 dark:text-neutral-300 border-neutral-200 dark:border-neutral-700 hover:border-neutral-300"
+              }`}
+            >
+              Map
+            </button>
+          </div>
           {/* Mobile filter toggle */}
           <Sheet
             open={mobileFiltersOpen}
@@ -227,6 +255,16 @@ export default function SearchResultsPage() {
 
           {/* Results grid */}
           <div className="flex-1 min-w-0">
+            {viewMode === "map" && !isLoading && hotels.length > 0 && (
+              <div className="mb-6">
+                <HotelMap
+                  hotels={hotels}
+                  selectedHotel={selectedHotel}
+                  onSelect={setSelectedHotel}
+                  height="520px"
+                />
+              </div>
+            )}
             {/* Active filter chips */}
             <AnimatePresence>
               {activeFilterCount > 0 && (

@@ -17,8 +17,53 @@ export default function ConfirmationPage() {
     guests,
     guestDetails,
     bookingRef,
+    bookingHistory,
+    addBookingHistory,
     clearBooking,
   } = useBookingStore();
+
+  useEffect(() => {
+    if (!bookingRef || !hotel || !room || !guestDetails) return;
+    if (bookingHistory.some((item) => item.ref === bookingRef)) return;
+
+    const nights = calcNights(checkIn, checkOut);
+    const roomTotal = room.pricePerNight * nights;
+    const taxes = Math.round(roomTotal * 0.15);
+    const total = roomTotal + taxes + 45;
+
+    addBookingHistory({
+      id: `${Date.now()}-${bookingRef}`,
+      ref: bookingRef,
+      hotelId: hotel.id,
+      hotelName: hotel.name,
+      roomId: room.id,
+      roomName: room.name,
+      city: hotel.location.city,
+      country: hotel.location.country,
+      image: hotel.images[0],
+      checkIn,
+      checkOut,
+      guests,
+      nights,
+      pricePerNight: room.pricePerNight,
+      total: roomTotal,
+      taxes,
+      resortFee: 45,
+      grandTotal: total,
+      status: "confirmed",
+      createdAt: new Date().toISOString(),
+    });
+  }, [
+    bookingRef,
+    bookingHistory,
+    hotel,
+    room,
+    checkIn,
+    checkOut,
+    guests,
+    guestDetails,
+    addBookingHistory,
+  ]);
 
   // Guard
   useEffect(() => {
