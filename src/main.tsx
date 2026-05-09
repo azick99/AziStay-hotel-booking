@@ -1,6 +1,7 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
+import ScrollToTop from "./components/layout/ScrollToTop";
 import { BrowserRouter } from "react-router";
 import { ClerkProvider } from "@clerk/react";
 import "leaflet/dist/leaflet.css";
@@ -19,6 +20,7 @@ createRoot(document.getElementById("root")!).render(
       afterSignOutUrl="/"
     >
       <BrowserRouter>
+        <ScrollToTop />
         <App />
       </BrowserRouter>
     </ClerkProvider>

@@ -81,7 +81,12 @@ export default function App() {
             <Route
               path="/ai-planner"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute
+                  authModal={{
+                    title: "You need to sign up or sign in first",
+                    dismissPath: "/",
+                  }}
+                >
                   <AITripPlannerPage />
                 </ProtectedRoute>
               }

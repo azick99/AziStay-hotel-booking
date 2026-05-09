@@ -18,7 +18,12 @@ import {
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { Separator } from "@/components/ui/separator";
-import { SignInButton, SignUpButton, useAuth, UserButton } from "@clerk/react";
+import {
+  SignInButton,
+  SignUpButton,
+  useAuth,
+  UserButton,
+} from "@clerk/react";
 import { useTheme } from "@/hooks/useTheme";
 
 export default function Navbar() {
@@ -142,7 +147,7 @@ export default function Navbar() {
                         avatarBox:
                           "w-9 h-9 rounded-xl ring-2 ring-brand-500/30",
                         userButtonPopoverCard:
-                          "rounded-2xl shadow-card border border-neutral-200",
+                          "z-[200] rounded-2xl shadow-card border border-neutral-200 dark:border-neutral-800",
                         userButtonPopoverActionButton: "rounded-xl",
                       },
                     }}
@@ -176,6 +181,7 @@ export default function Navbar() {
             <Sheet
               open={isMobileOpen}
               onOpenChange={setMobileOpen}
+              modal={false}
             >
               <SheetTrigger asChild>
                 <Button
@@ -235,17 +241,25 @@ export default function Navbar() {
                   {isLoaded && (
                     <>
                       {isSignedIn ? (
-                        <div className="flex items-center gap-3 px-4 py-2">
+                        <div className="flex flex-col gap-1 px-0">
+                          <p className="px-4 text-xs font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">
+                            My account
+                          </p>
                           <UserButton
+                            showName
                             appearance={{
                               elements: {
-                                avatarBox: "w-9 h-9 rounded-xl",
+                                rootBox: "w-full",
+                                userButtonTrigger:
+                                  "w-full flex flex-col-reverse items-center gap-3 justify-start px-4 py-3 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800",
+                                avatarBox:
+                                  "w-9 h-9 shrink-0 rounded-xl ring-2 ring-brand-500/30",
+                                userButtonPopoverCard:
+                                  "z-[200] rounded-2xl shadow-card border border-neutral-200 dark:border-neutral-800",
+                                userButtonPopoverActionButton: "rounded-xl",
                               },
                             }}
                           />
-                          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                            My Account
-                          </span>
                         </div>
                       ) : (
                         <div className="flex flex-col gap-2">
