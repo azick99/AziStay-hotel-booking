@@ -7,6 +7,8 @@ import { cn } from "@/lib/utils";
 interface Props {
   onSend: (msg: string) => void;
   isLoading: boolean;
+  /** Quick-start chips; show only for an empty conversation */
+  showSuggestionChips?: boolean;
 }
 
 const SUGGESTIONS = [
@@ -17,7 +19,11 @@ const SUGGESTIONS = [
   "Cultural trip to Marrakech for 4 days under $200/night",
 ];
 
-export default function ChatInput({ onSend, isLoading }: Props) {
+export default function ChatInput({
+  onSend,
+  isLoading,
+  showSuggestionChips = false,
+}: Props) {
   const [value, setValue] = useState("");
 
   const handleSend = () => {
@@ -28,8 +34,8 @@ export default function ChatInput({ onSend, isLoading }: Props) {
 
   return (
     <div className="border-t border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-900 p-4 rounded-b-2xl flex flex-col gap-3">
-      {/* Suggestion chips — only show when empty */}
-      {!value && (
+      {/* Suggestion chips — only before the first message */}
+      {showSuggestionChips && !value && (
         <div className="flex flex-wrap gap-2">
           {SUGGESTIONS.map((s) => (
             <button

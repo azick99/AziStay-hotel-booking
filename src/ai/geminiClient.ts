@@ -47,9 +47,12 @@ export async function getTripPlan(
     systemInstruction: TRIP_PLANNER_SYSTEM_PROMPT,
   });
 
-  // Build chat history (Gemini uses "user" | "model" roles)
+  // Build chat history (Gemini uses "user" | "model" roles).
+  // Include assistant bubbles via their visible `content` (intro text), not raw JSON — keeps multi-turn context.
+  // Cap length so multi-turn stays within context limits
   const geminiHistory = history
-    .filter((m) => !m.isLoading && !m.tripData) // exclude loading + structured
+    .filter((m) => !m.isLoading && m.content.trim())
+    .slice(-24)
     .map((m) => ({
       role: m.role === "assistant" ? "model" : "user",
       parts: [{ text: m.content }],
@@ -60,7 +63,7 @@ export async function getTripPlan(
     history: geminiHistory,
     safetySettings: SAFETY_SETTINGS,
     generationConfig: {
-      temperature: 0.7,
+      temperature: 0.88,
       maxOutputTokens: 2048,
       // Force JSON output
       responseMimeType: "application/json",

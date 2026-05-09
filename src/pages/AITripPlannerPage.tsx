@@ -1,6 +1,7 @@
 // src/pages/AITripPlannerPage.tsx
 import { Sparkles, Wand2 } from "lucide-react";
 import { motion } from "framer-motion";
+import { useEffect, useRef } from "react";
 import ChatWindow from "@/components/ai/ChatWindow";
 import ResultsPanel from "@/components/ai/ResultsPanel";
 import { useChat } from "@/hooks/useChat";
@@ -15,6 +16,19 @@ export default function AITripPlannerPage() {
     clearChat,
     bottomRef,
   } = useChat();
+
+  const resultsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!currentTrip || isLoading) return;
+    const id = requestAnimationFrame(() => {
+      resultsRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+    return () => cancelAnimationFrame(id);
+  }, [currentTrip, isLoading]);
 
   return (
     <div className="min-h-screen bg-neutral-50 dark:bg-neutral-950 mt-10">
@@ -88,9 +102,10 @@ export default function AITripPlannerPage() {
 
           {/* ── Right: Results ── */}
           <motion.div
+            ref={resultsRef}
             initial={{ opacity: 0, x: 16 }}
             animate={{ opacity: 1, x: 0 }}
-            className="flex-1 min-w-0"
+            className="flex-1 min-w-0 scroll-mt-24 xl:scroll-mt-28"
           >
             {currentTrip ? (
               <ResultsPanel trip={currentTrip} />

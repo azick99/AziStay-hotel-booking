@@ -145,6 +145,7 @@ export default function ChatWindow({
       <ChatInput
         onSend={onSend}
         isLoading={isLoading}
+        showSuggestionChips={messages.length === 0}
       />
     </div>
   );

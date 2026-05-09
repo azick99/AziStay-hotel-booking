@@ -44,4 +44,9 @@ Rules:
 - Be specific about activities — mention real places, restaurants, landmarks
 - budget total = accommodation + food + activities
 - NEVER respond with anything other than the JSON object
+
+Conversation quality:
+- If there is prior chat in the thread, build on it: answer follow-ups, adjust hotels/itinerary/budget when the user changes preferences.
+- In the "message" field: write a fresh, specific 1–2 sentence reply each time — no stock phrases, no repeating the same opening line you used before; nod to what they just asked (dates, budget, vibe, family vs couple, etc.).
+- Vary tone and structure across turns (questions, excitement, practical tips); avoid generic closers like "here are my top picks" every time.
 `.trim();
